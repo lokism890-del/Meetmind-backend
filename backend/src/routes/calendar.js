@@ -36,28 +36,16 @@ router.get('/auth-url', (req, res) => {
   }
 });
 
-// GET /api/calendar/callback (Google redirects here)
 router.get('/callback', async (req, res) => {
-  try {
-    const { code, error } = req.query;
+  const { code, error } = req.query;
+  const frontendUrl = 'https://meetmind-two.vercel.app';
 
-    if (error) {
-      return res.redirect(`https://meetmind-two.vercel.app/connect-calendar?error=${error}`);
-    }
-
-    if (!code) {
-      return res.redirect('https://meetmind-two.vercel.app/connect-calendar?error=no_code');
-    }
-
-    // Exchange code for tokens
-    const { tokens } = await oauth2Client.getToken(code);
-
-    // Store in session/cookie temporarily so frontend can retrieve
-    res.redirect(`https://meetmind-two.vercel.app/connect-calendar?code=${encodeURIComponent(code)}&success=true`);
-  } catch (err) {
-    console.error('OAuth callback error:', err);
-    res.redirect(`https://meetmind-two.vercel.app/connect-calendar?error=auth_failed`);
+  if (error) {
+    return res.redirect(`${frontendUrl}/connect-calendar?error=${error}`);
   }
+
+  // Redirect with code - NO clerk parameters
+  res.redirect(`${frontendUrl}/connect-calendar?code=${encodeURIComponent(code)}&success=true`);
 });
 
 // POST /api/calendar/callback (Frontend sends code here)

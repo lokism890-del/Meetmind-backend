@@ -293,13 +293,21 @@ export default function ConnectCalendar() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  useEffect(() => {
-    if (error) {
-      setShakeError(true);
-      const timer = setTimeout(() => setShakeError(false), 500);
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
+ useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  const success = params.get('success');
+  const err = params.get('error');
+
+  if (err) {
+    setError(`OAuth error: ${err}`);
+    return;
+  }
+
+  if (code && success === 'true') {
+    handleCodeExchange(code);
+  }
+}, []);
 
   const handleConnectGoogle = async () => {
     setLoading(true);

@@ -104,8 +104,9 @@ export default function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/connect-calendar" element={<ProtectedRoute><ConnectCalendar /></ProtectedRoute>} />
-          <Route path="/meeting/:id" element={<ProtectedRoute><Meeting /></ProtectedRoute>} />
+<Route path="/connect-calendar" 
+  element={<ProtectedRoute><ConnectCalendar /></ProtectedRoute>} 
+/>          <Route path="/meeting/:id" element={<ProtectedRoute><Meeting /></ProtectedRoute>} />
           <Route path="/upload" element={<ProtectedRoute><Upload /></ProtectedRoute>} />
           <Route path="/live/:id" element={<ProtectedRoute><Upload /></ProtectedRoute>} />
           <Route path="*" element={<Navigate to="/" />} />
