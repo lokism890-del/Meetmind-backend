@@ -12,7 +12,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors({
-  origin: ['https://meetmind-two.vercel.app', 'http://localhost:3000', 'http://localhost:5173'],
+  origin: [
+    'https://meetmind-two.vercel.app',
+    'https://meetmind-jfquq8x1k-lokism890-dels-projects.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:5173'
+  ],
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
